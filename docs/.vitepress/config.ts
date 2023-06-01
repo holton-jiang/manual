@@ -10,6 +10,28 @@ export default defineConfig({
   base: '/manual/', //GitHub部署需要设置该项目的名称(目录)。
   lastUpdated: true, //页面底部显示最后更新时间。
   contributors: true, //页面底部显示文档贡献者列表。
+  colorModeSwitch: true,
+  contributorsText: '贡献者',
+  selectLanguageText: '选择语言',
+  selectLanguageAriaLabel: '选择语言',
+  backToHome: '返回首页',
+  openInNewWindow: '在新窗口打开',
+  toggleColorMode: '切换颜色模式',
+  toggleSidebar: '切换侧边栏',
+  
+  // custom containers
+        tip: '小提示',
+        warning: '请注意',
+        danger: '警告',
+  
+  // 404 page
+        notFound: [
+          '这里什么都没有',
+          '我们怎么到这来了？',
+          '这是一个 404 页面',
+          '看起来我们进入了错误的链接',
+          '但是，如果你持之以恒，继续探寻，你可能会抵达你想要去的地方。',
+        ],
 
   //显示代码块的行数
   markdown: {
