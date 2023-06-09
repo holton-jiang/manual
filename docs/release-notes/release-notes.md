@@ -16,11 +16,11 @@ openSUSE Leap 是一款免费的基于 Linux 的操作系统，适用于您的 P
 
 本节包含与安装相关的说明。有关详细的安装说明，请参阅 [https://doc.opensuse.org/documentation/leap/startup/html/book.opensuse.startup/part-basics.html](https://doc.opensuse.org/documentation/leap/startup/html/book.opensuse.startup/part-basics.html) 上的文档。
 
-### 1.1 对系统角色事务服务器使用原子更新 #
+### 1.1 使用原子对操作系统事务服务器更新
 
- 安装程序支持系统角色事务服务器。此系统角色具有一个更新系统，该系统以原子方式应用更新（作为单个操作）并使它们在必要时易于恢复。这些功能基于所有其他 SUSE 和 openSUSE 发行版也依赖的包管理工具。这意味着绝大多数与 openSUSE Leap 15.5 的其他系统角色一起工作的 RPM 包也与系统角色 Transactional Server 一起工作。
+安装程序支持操作系统事务服务器。此系统角色具有一个更新系统，该系统以原子方式应用更新（作为单个操作）并使它们在必要时易于恢复。这些功能基于所有其他 SUSE 和 openSUSE 发行版也依赖的包管理工具。这意味着绝大多数与 openSUSE Leap 15.5 的其他系统角色一起工作的 RPM 包也与系统角色 Transactional Server 一起工作。
 
-::: details 注意：不兼容的包
+::: info 注意：不兼容的包
 某些软件包在其 RPM `%post` 脚本中修改了 `/var` 或 `/srv` 的内容。这些软件包不兼容。如果您找到这样的包，请提交错误报告。
 :::
 
@@ -31,11 +31,11 @@ openSUSE Leap 是一款免费的基于 Linux 的操作系统，适用于您的 P
 * 一个只读的根文件系统。为避免更新引起的问题和数据丢失，不得以其他方式写入根文件系统。因此，根文件系统在正常操作期间以只读方式挂载。  
     为了使这个设置工作，需要对文件系统进行两个额外的更改：为了允许在 `/etc` 中写入用户配置，该目录自动配置为使用 OverlayFS。 `/var` 现在是一个单独的子卷，可以由进程写入。
 
-::: 重要：事务服务器至少需要 12 GB 的磁盘空间
+::: warning 重要：事务服务器至少需要 12 GB 的磁盘空间
 系统角色 Transactional Server 需要至少 12 GB 的磁盘大小来容纳 Btrfs 快照。
 :::
 
-::: 重要：YaST 不工作事务模式
+::: warning 重要：YaST 不工作事务模式
 目前，YaST 不支持事务性更新。这是因为 YaST 会立即执行操作，而且它无法编辑只读文件系统。
 :::
 
@@ -62,7 +62,7 @@ systemctl disable --now transactional-update.timer rebootmgr.service
 
 在使用 UEFI（统一可扩展固件接口）引导的系统上安装 openSUSE 之前，强烈建议您检查硬件供应商推荐的任何固件更新，如果可用，安装此类更新。预安装 Windows 8 或更高版本表明您的系统使用 UEFI 启动。
 
-_Background:_ 某些 UEFI 固件存在错误，如果向 UEFI 存储区域写入过多数据，这些错误会导致固件崩溃。但是，没有明确的数据表明多少是“太多”。
+_背后的原因:_ 某些 UEFI 固件存在错误，如果向 UEFI 存储区域写入过多数据，这些错误会导致固件崩溃。但是，没有明确的数据表明多少是“太多”。
 
 openSUSE 通过不编写超过启动操作系统所需的最低限度的内容来最大限度地降低风险。最小值意味着告诉 UEFI 固件关于 openSUSE 引导装载程序的位置。使用 UEFI 存储区域存储引导和崩溃信息 ( `pstore` ) 的上游 Linux 内核功能已默认禁用。尽管如此，还是建议安装硬件供应商推荐的任何固件更新。
 
@@ -81,7 +81,6 @@ openSUSE 通过不编写超过启动操作系统所需的最低限度的内容�
 - [https://en.opensuse.org/SDB:System_upgrade](https://en.opensuse.org/SDB:System_upgrade)
 - [https://doc.opensuse.org/documentation/leap/startup/html/book-startup/cha-update-osuse.html](https://doc.opensuse.org/documentation/leap/startup/html/book-startup/cha-update-osuse.html)
 
-请确保同时查看本文档的以下部分：
 请确保同时查看本文档的以下部分： 
 - [[3 软件包变化]]
 - [[7.1 4096 位 RSA RPM 和存储库签名密钥的使用]]
@@ -98,13 +97,13 @@ openSUSE 通过不编写超过启动操作系统所需的最低限度的内容�
 zypper lifecycle
 ```
 
-### 3.2 删除的包
+### 3.2 删除的软件包
 
 删除的包不再作为分发的一部分运送。
 
 * gnome-todo：gnome-todo 已被 Endeavour 包取代。  
 msgpack：msgpack 被 msgpack-c 和 msgpack-cxx 取代。  
-nodejs-electron：这个旧版本的 Electron 已经停产，由于频繁的 ABI 中断，我们无法在 Leap 的整个生命周期内支持这个运行时。当前版本的 Electron 仍然可以从 OBS 上的 devel:languages:nodejs 存储库中获得。
+nodejs-electron：这个旧版本的 Electron 已经停更，由于频繁的 ABI 中断，我们无法在 Leap 的整个生命周期内支持。当前版本的 Electron 仍然可以从 OBS 上的 devel:languages:nodejs 存储库中获得。
 
 ## 4 驱动程序和硬件
 
@@ -122,8 +121,7 @@ nodejs-electron：这个旧版本的 Electron 已经停产，由于频繁的 ABI
 
 ### 4.2 网络安装映像在 Raspberry Pi 4 上启动时挂起
 
- Booting the network install image from USB stick on Raspberry Pi 4 hangs on boot. To resolve this issue, add the `console=tty` boot parameter. See details in the known issues section of our [Raspberry Pi 4 Hardware Compatibility List](https://en.opensuse.org/HCL:Raspberry%5FPi4#Boot%5Ffrom%5FUSB%5Fin%5FNet%5Finstall%5Fimage%5Fof%5FLeap%5F15.4%5Fhangs%5Fon%5Fboot).  
-从 Raspberry Pi 4 上的 USB 记忆棒引导网络安装映像在引导时挂起。要解决此问题，请添加 `console=tty` 引导参数。请参阅我们的 [Raspberry Pi 4 硬件兼容性列表](https://en.opensuse.org/HCL:Raspberry_Pi4#Boot_from_USB_in_Net_install_image_of_Leap_15.4_hangs_on_boot) 的已知问题部分中的详细信息。
+从 Raspberry Pi 4 上的 存储卡引导网络安装映像在引导时挂起。要解决此问题，请添加 `console=tty` 引导参数。请参阅我们的 [Raspberry Pi 4 硬件兼容性列表](https://en.opensuse.org/HCL:Raspberry_Pi4#Boot_from_USB_in_Net_install_image_of_Leap_15.4_hangs_on_boot) 的已知问题部分中的详细信息。
 
 ## 5 桌面
 
