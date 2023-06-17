@@ -17,7 +17,6 @@ openSUSE 中文手册初衷是希望能够助帮更多的计算机初学者了�
 <!-- readme: collaborators,contributors -end -->
 
 ### 本站 Vi 设计
-
-https://holton-jiang.github.io/manual/favicon.svg
+<img class="VPImage logo" src="/manual/favicon.svg" alt="" data-v-6db2186b="">
 
 来自对拍立得始祖：宝丽来的喜爱，选用彩虹条设计，仅此而已。
